@@ -43,13 +43,13 @@ DoublyLinkedList.prototype.insertAtEnd = function (data) {
 
 // insert after a given node 
 
-DoublyLinkedList.prototype.insertAfter = function(prevNode,data){
-    if (prevNode==null) {
+DoublyLinkedList.prototype.insertAfter = function (prevNode, data) {
+    if (prevNode == null) {
         return
     }
-    const newNode = new Node(data,prev.next,prev)
+    const newNode = new Node(data, prev.next, prev)
 
-    if (prevNode.next !== next) {
+    if (prevNode.next !== null) {
         prevNode.next.prev = newNode
     }
     prevNode.next = newNode
@@ -58,3 +58,48 @@ DoublyLinkedList.prototype.insertAfter = function(prevNode,data){
     }
 }
 
+// delete first node 
+
+DoublyLinkedList.prototype.deleteFirstNode = function () {
+    if (this.head == null) {
+        return
+    }
+    if (this.head == this.tail) {
+        this.head = null
+        this.tail = null
+    }
+    else {
+        this.head = this.head.next
+        this.head.prev = null
+    }
+}
+
+DoublyLinkedList.prototype.deleteLastNode = function(){
+
+    if (!this.tail) {
+        return;
+    }
+    if (this.head === this.tail ) {
+        this.head = null
+        this.tail = null
+    }else{
+        this.tail = this.tail.prev
+        this.tail.next = null
+    }
+}
+
+DoublyLinkedList.prototype.reverse = function(){
+    let current = this.head;
+    let temp = null
+    while (current != null) {
+        temp = current.prev
+        current.prev = current.next
+        current.next = temp
+        // move to next node 
+        current = current.prev
+    }
+    if (temp != null) {
+        this.tail = this.head
+        this.head = temp.prev
+    }
+}
