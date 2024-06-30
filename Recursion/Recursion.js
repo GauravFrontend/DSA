@@ -65,39 +65,80 @@ function recursiveReverseString(string, callNumber = 1) {
 
 // count vowels in a string
 
-function isVowel(character) {
-    let lowerChar = character.toLowerCase()
-    let vowels = "aeiou"
+// function isVowel(character) {
+//     let lowerChar = character.toLowerCase()
+//     let vowels = "aeiou"
 
-    if (vowels.indexOf(lowerChar) != -1) {
-        return true
-    }
-    else {
-        return false
-    }
-}
+//     if (vowels.indexOf(lowerChar) != -1) {
+//         return true
+//     }
+//     else {
+//         return false
+//     }
+// }
 
+// function countVowels(string) {
+//     let count = 0
+//     for (let i = 0; i < string.length; i++) {
+//         if (isVowel(string[i])) {
+//             count += 1
+//         }
+//         return count
+//     }
+// }
+
+// // console.log(countVowels("aeio"));
+
+// Iterative function to count vowels
 function countVowels(string) {
-    let count = 0
+    let count = 0;
     for (let i = 0; i < string.length; i++) {
         if (isVowel(string[i])) {
-            count += 1
+            count += 1;
         }
-        return count
+        console.log(`After processing '${string[i]}', count is: ${count}`);
     }
+    return count;
 }
 
-// console.log(countVowels("aeio"));
 
 
+// function recursiveCountVowels(string, stringLength){
 
-function recursiveCountVowels(string, stringLength){
+//     if (stringLength == 1) {
+//         return Number(isVowel(string[0]))
+//     }
 
-    if (stringLength == 1) {
-        return Number(isVowel(string[0]))
+//     return recursiveCountVowels(string, string.length - 1) + isVowel(string[stringLength - 1])
+// }
+
+// // 17:41
+
+
+function isVowel(char) {
+    return 'aeiouAEIOU'.includes(char);
+}
+// Recursive function to count vowels with detailed logs
+function recursiveCountVowels(string, stringLength) {
+    console.log(`Calling recursiveCountVowels with string: "${string}" and length: ${stringLength}`);
+
+    if (stringLength === 1) {
+        let result = Number(isVowel(string[0]));
+        console.log(`Base case reached with character '${string[0]}'. Is it a vowel? ${result}`);
+        return result;
     }
 
-    return recursiveCountVowels(string, string.length - 1) + isVowel(string[stringLength - 1])
+    let recursiveResult = recursiveCountVowels(string, stringLength - 1);
+    let isCurrentCharVowel = isVowel(string[stringLength - 1]);
+    let result = recursiveResult + isCurrentCharVowel;
+
+    console.log(`Returning from recursiveCountVowels with string: "${string}" and length: ${stringLength}`);
+    console.log(`Current character '${string[stringLength - 1]}' is vowel? ${isCurrentCharVowel}`);
+    console.log(`Current count including '${string[stringLength - 1]}' is: ${result}`);
+
+    return result;
 }
 
-// 17:41
+// Test cases with console logs
+// console.log("Iterative function result: ", countVowels("gaurav"));
+console.log("Recursive function result: ", recursiveCountVowels("Gau", "Gau".length));
